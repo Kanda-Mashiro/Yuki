@@ -13,18 +13,20 @@ git config --global user.email 'anonymous'
 
 git fetch
 
-# Build static pages
-git checkout $FROM
-npm install
-npm run build
-
 # Remove old pages
 git checkout $TO
 ls | grep -v 'static' | xargs -I {} rm -rf {} 
 
-# Checkout new pages to current branch 
-git checkout $FROM -- dist
-mv dist/* . && rm -rf dist
+# Build static pages
+git checkout $FROM
+npm install
+npm run build
+git checkout -- package-lock.json
+
+# Deploy new pages
+git checkout $TO
+mv ./dist/* . 
+rm -rf dist node_modules
 
 # Push changes
 git add -A
