@@ -26,6 +26,7 @@ git checkout -- package-lock.json
 # Deploy new pages
 git checkout $TO
 mv ./dist/* . 
+touch .nojekyll
 rm -rf dist node_modules
 
 # Push changes
