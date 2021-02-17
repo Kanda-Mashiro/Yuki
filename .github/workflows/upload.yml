@@ -1,0 +1,13 @@
+on: 
+    push:
+        branches:
+        - upload 
+
+jobs:
+    upload:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Check out repository code
+          uses: actions/checkout@v2
+        - name: Upload files
+          run: sh tools/upload.sh
