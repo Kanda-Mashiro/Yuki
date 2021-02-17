@@ -1,0 +1,13 @@
+on:
+    push:
+        branches:
+        - front-end 
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Check out repository code
+          uses: actions/checkout@v2
+        - name: Deploy static pages 
+          run: sh tools/deploy.sh
