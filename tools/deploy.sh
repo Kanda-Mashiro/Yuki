@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -x
 FROM='front-end'
 TO='gh-pages'
 
