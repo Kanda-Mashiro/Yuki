@@ -16,7 +16,11 @@ git fetch
 
 # Remove old pages
 git checkout $TO
+echo "before delete"
+ls
 ls | grep -v 'static' | xargs -I {} rm -rf {} 
+echo "after delete"
+ls
 
 # Build static pages
 git checkout $FROM
