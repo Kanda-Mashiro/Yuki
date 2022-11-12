@@ -1,6 +1,5 @@
 #!/bin/sh
 
-set -x
 FROM='front-end'
 TO='gh-pages'
 
@@ -14,23 +13,17 @@ git config --global user.email 'anonymous'
 
 git fetch
 
-# Remove old pages
-git checkout $TO
-echo "before delete"
-ls
-ls | grep -v 'static' | xargs -I {} rm -rf {} 
-echo "after delete"
-ls
-
-# Build static pages
+# Build stati pages
 git checkout $FROM
 npm install
 npm run build
 git checkout -- package-lock.json
 
-# Deploy new pages
+# Remove old pages
 git checkout $TO
-mv ./dist/* . 
+ls | grep -E -v 'static|dist|CNAME' | xargs -I {} rm -rf {}
+mv ./dist/* .
+rm -rf ./dist
 touch .nojekyll
 rm -rf dist node_modules
 
